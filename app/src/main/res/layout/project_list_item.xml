@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="project" type="com.example.githubassignment.model.Project"/>
+        <variable name="callback" type="com.example.githubassignment.viewmodel.inderface.ProjectClickCallback"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() ->  callback.onClick(project)}"
+        android:paddingBottom="@dimen/padd_10"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:paddingTop="@dimen/padd_10">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/layout_width"
+            android:layout_height="@dimen/layout_height"
+            android:layout_marginTop="@dimen/padd_10"
+            app:civ_border_color="@color/gray"
+            app:civ_border_width="1dp"
+            android:src="@{project.user.avatar_url}"/>
+
+        <LinearLayout
+            android:layout_toRightOf="@+id/avatar"
+            android:layout_marginStart="@dimen/item_horizontal_margin"
+            android:layout_marginEnd="@dimen/item_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:textColor="@android:color/black"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/project_text"
+                android:text="@{project.title}"/>
+
+            <TextView
+                android:id="@+id/project_watchers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:contentDescription="@string/project_watchers"
+                android:textSize="@dimen/project_text"
+                android:maxLength="140"
+                android:ellipsize="end"
+                android:text="@{project.body}"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
